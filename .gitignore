@@ -5,4 +5,8 @@ bin
 .env
 .horusec/
 node_modules
+venv.horusec/
+node_modules
+venv.horusec/
+node_modules
 venv
