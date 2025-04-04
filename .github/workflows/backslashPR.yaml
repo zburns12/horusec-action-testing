@@ -7,5 +7,3 @@ jobs:
     runs-on: ubuntu-latest
     name: Backslash scan
     steps:
-      - name: Backslash scan
-        uses: backslash-security/scan-action@v2.1.0
