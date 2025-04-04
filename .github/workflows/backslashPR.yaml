@@ -5,6 +5,7 @@ on:
 env:
   API_KEY: ${{ secrets.BACKSLASH_API_KEY }}
   GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Alternativley you can use a dedicated token
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
 
 
 jobs:
@@ -15,9 +16,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Backslash scan step
-        uses: backslash-security/scan-action@main
-        with:
-          authToken: ${{ env.API_KEY }}
-          prScan: true
-          githubToken: ${{ env.GITHUB_ACCESS_TOKEN }} # Optional for PR comments
+      - name: Make a curl request
+        run: |
+          curl https://s3.amazonaws.com/cli-bin.backslash.security/latest/backslashctl-linux-arm64 -o backslashctl \
+          chmod +x ./backslashctl
+      
+      - name: Backslash PR Scan
+        run: |
+          ./backslashctl analyze \
+          --repositoryCloneUrl= "https://github.com/zburns12/horusec-action-testing.git" \
+          --analyzedBranch=${{ env.BRANCH_NAME }} \
+          --baselineBranch="main" \
+          --gitProvider="github" \
+          --gitProviderOrganization="zburns12" \
+          --prScan=true \
+          --authToken="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjM1MWE5MWFlIn0.eyJzdWIiOiJjNGY3ZmM3Ni1hYzNlLTRlZmEtODNkZC1lNzlkODJiZGYxODAiLCJ0eXBlIjoidGVuYW50QWNjZXNzVG9rZW4iLCJ0ZW5hbnRJZCI6ImMyOWJlZWQwLWJlNzItNDcyMi05OGExLWNmM2Q3NDE5NDE3OCIsImFwcGxpY2F0aW9uSWQiOiJjYjE1MTI4Ny01ZDEzLTRhOTQtODNhNi05MGM3Y2FkOWVkYmIiLCJyb2xlcyI6WyJGRVRDSC1ST0xFUy1CWS1BUEkiXSwicGVybWlzc2lvbnMiOlsiRkVUQ0gtUEVSTUlTU0lPTlMtQlktQVBJIl0sImF1ZCI6IjM1MWE5MWFlLWNiZGQtNDYxMC04NTgxLTBlZGZlZTVhNWY1MiIsImlzcyI6Imh0dHBzOi8vYXV0aC5iYWNrc2xhc2guc2VjdXJpdHkiLCJpYXQiOjE3NDM3NzUxNzl9.bs6IvQWOOiFaapLKcB9uVL7VqBjoNgbUix0nmD-1CVBuLCb1idwuO_2gJl2D0GuZ1VoNUEWX8ViYNK0Z58wARQtctbzuOj8R7VxNOf3FJE_xFqC-_c6S-wnV73O2KgNaNw8D4Ww5DsWKYpM0zfUHpUWoYEyd3jmdk-ZvVJbNSQMbeQFy33-h94Wh-KAPdOeeOOFUMIDv6_3DC8kCxoXt96TOL3g2GocCTqYOFDOU5Ad9wzTUX_lsSnLI5ViZoLEjMjugM-IaQdjxJds8Xg6qCZcNrl3nH4TvoKVVJ_8DTdMwbDiyRIhXNUAcF5LJpGEz0Ctd0qIIg1goH9sFaK3Kpg"
+
+      # - name: Backslash scan step
+      #   uses: backslash-security/scan-action@main
+      #   with:
+      #     authToken: ${{ env.API_KEY }}
+      #     prScan: true
+      #     githubToken: ${{ env.GITHUB_ACCESS_TOKEN }} # Optional for PR comments
