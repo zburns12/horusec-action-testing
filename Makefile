@@ -1,4 +1,7 @@
-HORUSEC ?= horusec
+ which $(HORUSEC)))
+		curl -fsSL https://raw.github which $(HORUSEC)))
+		curl -fsSL https://raw.github which $(HORUSEC)))
+		curl -fsSL https://raw.githubHORUSEC ?= horusec
 GO ?= go
 ADDLICENSE ?= addlicense
 
