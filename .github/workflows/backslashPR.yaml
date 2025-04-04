@@ -1,0 +1,14 @@
+name: 'CI | Backslash scan'
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  backslash_scan_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Backslash scan
+        uses: backslash-security/scan-action@v2.1.0
