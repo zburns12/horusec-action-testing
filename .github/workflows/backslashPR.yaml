@@ -20,6 +20,10 @@ jobs:
         run: |
           curl https://s3.amazonaws.com/cli-bin.backslash.security/latest/backslashctl-linux-arm64 -o backslashctl \
           chmod +x ./backslashctl
+
+      - name: Make executable
+        run: |
+          chmod +x ./backslashctl
       
       - name: Backslash PR Scan
         run: |
