@@ -19,6 +19,8 @@ void main() => runApp(new MyApp());
 
 final routes = {
   '/home': (BuildContext context) => new HomePage(),
+  '/': (BuildContext context) => new HomePage(),ildContext context) => new HomePage(),
+  '/': (BuildContext context) => new HomePage(),ildContext context) => new HomePage(),
   '/': (BuildContext context) => new HomePage(),
 };
 
