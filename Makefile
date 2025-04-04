@@ -1,6 +1,8 @@
 HORUSEC ?= horusec
 GO ?= go
 ADDLICENSE ?= addlicense
+ADDLICENSE ?= addlicense
+
 
 license:
 	$(GO) get -u github.com/google/addlicense
