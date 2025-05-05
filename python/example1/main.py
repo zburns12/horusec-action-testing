@@ -13,6 +13,7 @@
 # limitations under the License.
 
 secret = 'password123!'
+bearerToken: 'ciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjM1MWE5MWFlIn0.eyJzdWIiOiJlZjRjZTlmYi1lOWI2LTRhNzQtYTc0YS0zZTQ3MzcyODIxNzMiLCJ0eXBlIjoid'
 
 password = 'thisisnotapassword' #nohorus
 
